@@ -1,7 +1,8 @@
-import { ScrollView, View } from "react-native";
+import { Alert, ScrollView, View } from "react-native";
 import { Button, Card, TextInput, HelperText } from "react-native-paper";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, FormProvider } from "react-hook-form";
 import * as services from '../../../services/login-services';
+import * as auth from '../../../auth/auth-app';
 
 
 export function Login({ navigation }) {
@@ -10,14 +11,19 @@ export function Login({ navigation }) {
         services.postLogin(data)
         .then(
             result => {
-               reset(
+               
+               auth.signIn(result)
+
+               Alert.alert('Sucesso',`${result.email} - Autenticação realizada`)
+               
+                reset(
                 {
                 email: '', 
                 senha:''
                 }
             )
             
-            //navigation.navigate('')
+            navigation.navigate('consulta-contatos')
             
         }
         )
