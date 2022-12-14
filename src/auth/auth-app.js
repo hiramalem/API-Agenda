@@ -22,10 +22,8 @@ export const signOut = async () => {
 
 export const getData = async () => {
 
-    const content = JSON.stringify(data);
-
     try{
-        return await AsyncStorage.setItem('USER_DATA')
+        return await AsyncStorage.getItem('USER_DATA')
     }
 
     catch (e) {
