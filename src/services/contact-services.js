@@ -12,6 +12,15 @@ export const postContact = (data) => {
     )
 }
 
+export const putContact = (data) => {
+    return axios.put(`${config.getApiContatos()}/contatos`, data)
+    .then(
+        response => {
+            return response.data;
+        }
+    )
+}
+
 //Consultar Contato
 export const getAllContatos = () => {
     return axios.get(`${config.getApiContatos()}/contatos`)

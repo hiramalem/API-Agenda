@@ -29,7 +29,14 @@ export function ConsultaContatos({ navigation }) {
     useEffect(
         ()=>{
             consultarContatos();
-        }, []
+
+            const result = navigation.addListener('focus', ()=>{
+                consultarContatos();
+            })
+
+            return result;
+
+        }, [navigation]
     )
 
     return (
@@ -53,7 +60,13 @@ export function ConsultaContatos({ navigation }) {
                                 <Text>{data.telefone}</Text>
                             </Card.Content>
                             <Card.Actions>
-                                <Button icon="pencil-outline">Editar</Button>
+                                <Button icon="pencil-outline"
+                                onPress={()=>{
+                                    navigation.navigate('editar-contato',{
+                                        idContato: data.idContato 
+                                    })
+                                }}
+                                >Editar</Button>
                                 <Button 
                                 icon="delete-forever-outline"
                                 onPress={()=>{
